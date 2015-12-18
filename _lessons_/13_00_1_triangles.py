@@ -5,24 +5,21 @@
 # Give a list A containing at least 3 positive integers in non-descending order
 # find the number of triangles that can be constructed using list elements
 def triangles(A):
-    results = []
+    result = 0
     n = len(A)
     for x in xrange(n):
+        z = 0
         for y in xrange(x+1, n):
-            z = y + 1
             while z < n and A[x] + A[y] > A[z]:
-                results.append([A[x], A[y], A[z]])
                 z += 1
-    return results
-
+            result += z - y - 1
+    return result
 
 A1 = [1, 2, 3, 4, 5]
 A2 = [2, 2, 5, 6]
 
-A = A1
-results = triangles(A)
-print "List: %s\nTriangles (%s): %s" % (A, len(results), results)
-
-A = A2
-results = triangles(A)
-print "List: %s\nTriangles (%s): %s" % (A, len(results), results)
+for A in [A1, A2]:
+    print "=" * 20
+    print "List:", A
+    result = triangles(A)
+    print "Triangles: %s" % (result)
